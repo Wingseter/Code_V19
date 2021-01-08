@@ -1,6 +1,9 @@
 package codev19;
 
+import codev19.model.Analyze;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -8,12 +11,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import javax.naming.ldap.Control;
 import java.io.IOException;
 
 public class Main extends Application {
 
     private Stage primaryStage;
-    private AnchorPane rootLayout;
+    private BorderPane rootLayout;
+    private ObservableList<Analyze> AnalyzeData = FXCollections.observableArrayList();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -29,15 +34,17 @@ public class Main extends Application {
         // 래이아웃 불러오기
         initRootLayout();
 
+        // 오버레이 레이아웃 불러오기
+        showAnalyzeOverview();
     }
 
     public void initRootLayout() {
         try {
             // 레이아웃 파일 불러오기
-            Parent root = FXMLLoader.load(getClass().getResource("codev19.fxml"));
+            rootLayout = FXMLLoader.load(getClass().getResource("RootLayout.fxml"));
 
             // 레이아웃 적용
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
 
             // 화면 띄우기
@@ -47,8 +54,29 @@ public class Main extends Application {
         }
     }
 
+    public void showAnalyzeOverview() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("codev19.fxml"));
+            AnchorPane analyzeOverview = (AnchorPane) loader.load();
+
+            rootLayout.setCenter(analyzeOverview);
+
+            //Controller controller = loader.getController();
+            //controller.setMain(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // primaryStage 반환
     public Stage getPrimaryStage() {
-        return new Stage();
+        return primaryStage;
+    }
+
+    //
+    public ObservableList<Analyze> getAnalyzeData(){
+        return AnalyzeData;
     }
 
     public static void main(String[] args) {

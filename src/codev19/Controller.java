@@ -6,6 +6,16 @@ import javafx.scene.control.TableView;
 
 public class Controller {
     @FXML
-    private TableView<Analyze> analyzeTable;
+    private TableView<Analyze> AnalyzeTable;
+    private Main Main;
+    @FXML
+    private void initialize() {
+
+    }
+
+    public void setMain(Main main){
+        this.Main = main;
+        AnalyzeTable.setItems(main.getAnalyzeData());
+    }
 
 }
