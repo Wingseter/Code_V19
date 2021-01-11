@@ -16,7 +16,7 @@ public class Analyze {
         this(null, null, null, null, 0, 0);
     }
 
-    //
+    // 생성자
     public Analyze(String state, String city, String street, String clinic, Integer total, Integer positivity) {
         this.State = new SimpleStringProperty(state);
         this.City = new SimpleStringProperty(city);
@@ -27,7 +27,7 @@ public class Analyze {
         this.Persentage = new SimpleDoubleProperty(positivity / total);
     }
 
-    // get method
+    // get method Colllection
     public String getState() {
         return State.get();
     }
@@ -44,4 +44,66 @@ public class Analyze {
         return Clinic.get();
     }
 
+    public Integer getTotal() {
+        return Total.get();
+    }
+
+    public Integer getPositive() {
+        return Positivity.get();
+    }
+
+    public Double getPersentage() { return Persentage.get(); }
+
+
+    // set method Collection
+    public void setState(String state){ State.set(state); }
+
+    public void setCity(String city){ City.set(city); }
+
+    public void setStreet(String street) {
+        Street.set(street);
+    }
+
+    public void setClinic(String clinic) { Clinic.set(clinic); }
+
+    public void setTotal(Integer total) {
+        Total.set(total);
+    }
+
+    public void setPositivity(Integer positivity) {
+        Positivity.set(positivity);
+    }
+
+    public void setPersentage(Double persentage) {
+        Persentage.set(persentage);
+    }
+
+    // return properties
+    public StringProperty stateProperty() {
+        return State;
+    }
+
+    public StringProperty cityProperty(){
+        return City;
+    }
+
+    public StringProperty streetProperty() {
+        return Street;
+    }
+
+    public StringProperty clinicProperty() {
+        return Clinic;
+    }
+
+    public IntegerProperty totalProperty() {
+        return Total;
+    }
+
+    public IntegerProperty positivitiyProperty() {
+        return Positivity;
+    }
+
+    public DoubleProperty persentageProperty() {
+        return Persentage;
+    }
 }

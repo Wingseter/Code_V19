@@ -36,6 +36,8 @@ public class Main extends Application {
 
         // 오버레이 레이아웃 불러오기
         showAnalyzeOverview();
+
+        AnalyzeData.add(new Analyze("경기도", "성남시", "분당구", "1보건소", 10, 5));
     }
 
     public void initRootLayout() {
