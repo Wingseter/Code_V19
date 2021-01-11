@@ -38,6 +38,9 @@ public class Main extends Application {
         showAnalyzeOverview();
 
         AnalyzeData.add(new Analyze("경기도", "성남시", "분당구", "1보건소", 10, 5));
+        AnalyzeData.add(new Analyze("경기도", "성남시", "분당구", "1보건소", 10, 5));
+        AnalyzeData.add(new Analyze("경기도", "성남시", "분당구", "1보건소", 10, 5));
+        AnalyzeData.add(new Analyze("경기도", "성남시", "분당구", "1보건소", 10, 5));
     }
 
     public void initRootLayout() {
@@ -58,12 +61,14 @@ public class Main extends Application {
 
     public void showAnalyzeOverview() {
         try {
+            // Fxml 파일 불러오기
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("codev19.fxml"));
             AnchorPane analyzeOverview = (AnchorPane) loader.load();
 
             rootLayout.setCenter(analyzeOverview);
 
+            // 컨트롤러 연결하기
             codev19Controller controller = loader.getController();
             controller.setMain(this);
         } catch (IOException e) {
@@ -76,7 +81,7 @@ public class Main extends Application {
         return primaryStage;
     }
 
-    //
+    // 데이터 가져오기
     public ObservableList<Analyze> getAnalyzeData(){
         return AnalyzeData;
     }

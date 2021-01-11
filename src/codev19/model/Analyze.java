@@ -24,7 +24,7 @@ public class Analyze {
         this.Clinic = new SimpleStringProperty(clinic);
         this.Total = new SimpleIntegerProperty(total);
         this.Positivity = new SimpleIntegerProperty(positivity);
-        this.Persentage = new SimpleDoubleProperty(positivity / total);
+        this.Persentage = new SimpleDoubleProperty((double)positivity / (double)total);
     }
 
     // get method Colllection
@@ -44,6 +44,24 @@ public class Analyze {
         return Clinic.get();
     }
 
+    public String getSelection() {
+        if(!getClinic().equals("")){
+            return getClinic();
+        }
+        else if(!getStreet().equals("")){
+            return getStreet();
+        }
+        else if(!getCity().equals("")){
+            return getCity();
+        }
+        else if(!getState().equals("")){
+            return getState();
+        }
+        else {
+            return "";
+        }
+    }
+
     public Integer getTotal() {
         return Total.get();
     }
@@ -53,6 +71,7 @@ public class Analyze {
     }
 
     public Double getPersentage() { return Persentage.get(); }
+
 
 
     // set method Collection
