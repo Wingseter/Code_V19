@@ -64,8 +64,8 @@ public class Main extends Application {
 
             rootLayout.setCenter(analyzeOverview);
 
-            //Controller controller = loader.getController();
-            //controller.setMain(this);
+            codev19Controller controller = loader.getController();
+            controller.setMain(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
