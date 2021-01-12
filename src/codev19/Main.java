@@ -1,17 +1,17 @@
 package codev19;
 
+import codev19.database.myDB;
 import codev19.model.Analyze;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import javax.naming.ldap.Control;
 import java.io.IOException;
 
 public class Main extends Application {
@@ -19,6 +19,9 @@ public class Main extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
     private ObservableList<Analyze> AnalyzeData = FXCollections.observableArrayList();
+
+    // 데이터배이스
+    private myDB db;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -37,10 +40,23 @@ public class Main extends Application {
         // 오버레이 레이아웃 불러오기
         showAnalyzeOverview();
 
-        AnalyzeData.add(new Analyze("경기도", "성남시", "분당구", "1보건소", 10, 5));
-        AnalyzeData.add(new Analyze("경기도", "성남시", "분당구", "1보건소", 10, 5));
-        AnalyzeData.add(new Analyze("경기도", "성남시", "분당구", "1보건소", 10, 5));
-        AnalyzeData.add(new Analyze("경기도", "성남시", "분당구", "1보건소", 10, 5));
+        // db 생성
+        db = new myDB();
+        sqlConfig config = new sqlConfig();
+        if (!db.connectDB(config.server, config.dbName, config.user, config.password)){
+
+        }
+
+        AnalyzeData.add(new Analyze("경기도", "성남시", "판교로", "1진료소", 10, 5));
+        AnalyzeData.add(new Analyze("경기도", "성남시", "판교로", "2진료소", 20, 10));
+        AnalyzeData.add(new Analyze("경기도", "성남시", "판교로", "3진료소", 20, 5));
+        AnalyzeData.add(new Analyze("경기도", "성남시", "판교로", "", 50, 20));
+        AnalyzeData.add(new Analyze("경기도", "성남시", "성남대로", "이하진료소", 10, 5));
+        AnalyzeData.add(new Analyze("경기도", "성남시", "성남대로", "이중진료소", 20, 10));
+        AnalyzeData.add(new Analyze("경기도", "성남시", "성남대로", "이상진료소", 20, 5));
+        AnalyzeData.add(new Analyze("경기도", "성남시", "성남대로", "", 50, 20));
+        AnalyzeData.add(new Analyze("경기도", "성남시", "", "", 100, 40));
+        AnalyzeData.add(new Analyze("경기도", "", "", "", 100, 50));
     }
 
     public void initRootLayout() {

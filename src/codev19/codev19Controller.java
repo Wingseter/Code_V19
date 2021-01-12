@@ -1,5 +1,6 @@
 package codev19;
 
+import codev19.Main;
 import codev19.model.Analyze;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -53,7 +54,7 @@ public class codev19Controller {
     private Label PersentageLabel;  // 확률 라벨
 
 
-    private Main Main;  // 메인 윈도우
+    private codev19.Main Main;  // 메인 윈도우
 
     @FXML
     private void initialize() {
