@@ -29,7 +29,6 @@ public class myDB {
     public boolean connectDB(String server,String dbName, String uid, String password) {
         try {
             con = DriverManager.getConnection(server + "/" + dbName, uid, password);
-            st = con.createStatement();
         } catch (SQLException sqlEX) {
             Logger lgr = Logger.getLogger(myDB.class.getName());
             return false;
@@ -40,6 +39,7 @@ public class myDB {
     // Query 실행하기
     public boolean execQuery(String sql){
         try{
+            st = con.createStatement();
             rs = st.executeQuery(sql);
         } catch (SQLException sqlEX){
             Logger lgr = Logger.getLogger(myDB.class.getName());

@@ -2,12 +2,13 @@ package codev19;
 
 import codev19.database.myDB;
 import codev19.model.Analyze;
+import codev19.config.sqlConfig;
+import codev19.utils.Popup;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -22,6 +23,9 @@ public class Main extends Application {
 
     // 데이터배이스
     private myDB db;
+
+    // 팝업
+    private Popup alert;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -40,24 +44,40 @@ public class Main extends Application {
         // 오버레이 레이아웃 불러오기
         showAnalyzeOverview();
 
+        // 팝업 생성기
+        alert = new Popup();
+
         // db 생성
         db = new myDB();
+        // db 설정 불러오기
         sqlConfig config = new sqlConfig();
-        if (!db.connectDB(config.server, config.dbName, config.user, config.password)){
 
+        // db 연결하기
+        if (!db.connectDB(config.server, config.dbName, config.user, config.password)){
+            alert.show("ERROR", "db connection error","connectDB has an ERROR");
         }
 
-        AnalyzeData.add(new Analyze("경기도", "성남시", "판교로", "1진료소", 10, 5));
-        AnalyzeData.add(new Analyze("경기도", "성남시", "판교로", "2진료소", 20, 10));
-        AnalyzeData.add(new Analyze("경기도", "성남시", "판교로", "3진료소", 20, 5));
-        AnalyzeData.add(new Analyze("경기도", "성남시", "판교로", "", 50, 20));
-        AnalyzeData.add(new Analyze("경기도", "성남시", "성남대로", "이하진료소", 10, 5));
-        AnalyzeData.add(new Analyze("경기도", "성남시", "성남대로", "이중진료소", 20, 10));
-        AnalyzeData.add(new Analyze("경기도", "성남시", "성남대로", "이상진료소", 20, 5));
-        AnalyzeData.add(new Analyze("경기도", "성남시", "성남대로", "", 50, 20));
-        AnalyzeData.add(new Analyze("경기도", "성남시", "", "", 100, 40));
-        AnalyzeData.add(new Analyze("경기도", "", "", "", 100, 50));
+        loadData();
     }
+
+    public void loadData() {
+        if(!db.execQuery("SELECT * FROM load_covid_result()")){
+            // 목록 불러오는 query 실행
+            alert.show("ERROR", "Query Error","cannot execute query");
+            return;
+        }
+
+        while(db.next()){
+            String state, city, street, clinic;
+            state = db.getResult(1);
+            city = db.getResult(2);
+            street = db.getResult(3);
+            clinic = db.getResult(4);
+
+            AnalyzeData.add(new Analyze(state, city, street, clinic, 1, 0));
+        }
+    }
+
 
     public void initRootLayout() {
         try {
