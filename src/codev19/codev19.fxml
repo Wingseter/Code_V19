@@ -52,6 +52,7 @@
                       <TableColumn fx:id="CityColumn" prefWidth="75.0" text="City" />
                         <TableColumn fx:id="StreetColumn" prefWidth="75.0" text="Street" />
                         <TableColumn fx:id="ClinicColumn" prefWidth="75.0" text="Clinic" />
+                        <TableColumn fx:id="PeopleColumn" prefWidth="75.0" text="People" />
                         <TableColumn fx:id="TotalColumn" prefWidth="75.0" text="Total" />
                         <TableColumn fx:id="PositiveColumn" prefWidth="75.0" text="Positive" />
                         <TableColumn fx:id="PersentageColumn" prefWidth="75.0" text="Persentage" />

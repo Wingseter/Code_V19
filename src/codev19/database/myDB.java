@@ -1,7 +1,5 @@
 package codev19.database;
 
-import javafx.scene.control.Alert;
-
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,18 +19,22 @@ public class myDB {
         } catch (SQLException sqlEX){
             // 에러나면 소멸
             Logger lgr = Logger.getLogger(myDB.class.getName());
-            return;
+            lgr.log(Level.SEVERE, sqlEX.getMessage(), sqlEX);
         }
     }
 
     // DB 연결하기
     public boolean connectDB(String server,String dbName, String uid, String password) {
         try {
+            // DB 연결
             con = DriverManager.getConnection(server + "/" + dbName, uid, password);
         } catch (SQLException sqlEX) {
+            // 에러나면 false 반환
             Logger lgr = Logger.getLogger(myDB.class.getName());
+            lgr.log(Level.SEVERE, sqlEX.getMessage(), sqlEX);
             return false;
         }
+        // 성공하면 true 반환
         return true;
     }
 
@@ -43,6 +45,7 @@ public class myDB {
             rs = st.executeQuery(sql);
         } catch (SQLException sqlEX){
             Logger lgr = Logger.getLogger(myDB.class.getName());
+            lgr.log(Level.SEVERE, sqlEX.getMessage(), sqlEX);
             return false;
         }
         return true;
@@ -59,7 +62,7 @@ public class myDB {
             // 에러 나면 로그 기록
             Logger lgr = Logger.getLogger(myDB.class.getName());
             lgr.log(Level.SEVERE, sqlEX.getMessage(), sqlEX);
-            // 그리고 false 반환
+            // 실패하면 false 반환
             retval = false;
         }
         return retval;
@@ -67,7 +70,7 @@ public class myDB {
 
     public String getResult(int col){
         try{
-            // 1번째 결과를 가져오도록해
+            // 결과를 가져온다
             return rs.getString(col);
         } catch (SQLException sqlEX){
             // 에러 나면 로그 기록

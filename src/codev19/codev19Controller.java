@@ -28,6 +28,9 @@ public class codev19Controller {
     private TableColumn<Analyze, String> ClinicColumn;  // 진료소 단위 column
 
     @FXML
+    private TableColumn<Analyze, String> PeopleColumn;  // 사람 단위 column
+
+    @FXML
     private TableColumn<Analyze, Integer> TotalColumn;  // 전체 검사 수 column
 
     @FXML
@@ -63,6 +66,7 @@ public class codev19Controller {
         CityColumn.setCellValueFactory(cellData -> cellData.getValue().cityProperty());
         StreetColumn.setCellValueFactory(cellData -> cellData.getValue().streetProperty());
         ClinicColumn.setCellValueFactory(cellData -> cellData.getValue().clinicProperty());
+        PeopleColumn.setCellValueFactory(cellData -> cellData.getValue().peopleProperty());
         TotalColumn.setCellValueFactory(cellData -> cellData.getValue().totalProperty().asObject());
         PositiveColumn.setCellValueFactory(cellData -> cellData.getValue().positivitiyProperty().asObject());
         PersentageColumn.setCellValueFactory(cellData -> cellData.getValue().persentageProperty().asObject());

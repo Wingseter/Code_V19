@@ -3,6 +3,7 @@ package codev19;
 import codev19.database.myDB;
 import codev19.model.Analyze;
 import codev19.config.sqlConfig;
+import codev19.utils.CovidCounter;
 import codev19.utils.Popup;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -27,6 +28,9 @@ public class Main extends Application {
     // 팝업
     private Popup alert;
 
+    // 분석기
+    private CovidCounter counter;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         // primaryStage 저장
@@ -47,6 +51,9 @@ public class Main extends Application {
         // 팝업 생성기
         alert = new Popup();
 
+        // 분석기
+        counter = new CovidCounter();
+
         // db 생성
         db = new myDB();
         // db 설정 불러오기
@@ -60,6 +67,7 @@ public class Main extends Application {
         loadData();
     }
 
+    // db에서 데이터 불러오기
     public void loadData() {
         if(!db.execQuery("SELECT * FROM load_covid_result()")){
             // 목록 불러오는 query 실행
@@ -68,14 +76,17 @@ public class Main extends Application {
         }
 
         while(db.next()){
-            String state, city, street, clinic;
-            state = db.getResult(1);
-            city = db.getResult(2);
-            street = db.getResult(3);
-            clinic = db.getResult(4);
-
-            AnalyzeData.add(new Analyze(state, city, street, clinic, 1, 0));
+            while(counter.inputData(db.getResult(1), db.getResult(2),  db.getResult(3), db.getResult(4)
+                    , db.getResult(5), Boolean.parseBoolean(db.getResult(6)) ? 1 : 0)){
+                // 분석 결과 추가
+               AnalyzeData.add(counter.outputAnalyze());
+            }
+            // 사람 하나 추가
+            AnalyzeData.add(counter.outputData());
         }
+
+        // 전체 종합 결과 추가
+        AnalyzeData.add(counter.totalAnalyze());
     }
 
 

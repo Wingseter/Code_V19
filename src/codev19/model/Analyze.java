@@ -7,21 +7,23 @@ public class Analyze {
     private final StringProperty City;
     private final StringProperty Street;
     private final StringProperty Clinic;
+    private final StringProperty People;
     private final IntegerProperty Total;
     private final IntegerProperty Positivity;
     private final DoubleProperty  Persentage;
 
     // default 생성자
     public Analyze() {
-        this(null, null, null, null, 0, 0);
+        this(null, null, null, null, null, 0, 0);
     }
 
     // 생성자
-    public Analyze(String state, String city, String street, String clinic, Integer total, Integer positivity) {
+    public Analyze(String state, String city, String street, String clinic, String people, Integer total, Integer positivity) {
         this.State = new SimpleStringProperty(state);
         this.City = new SimpleStringProperty(city);
         this.Street = new SimpleStringProperty(street);
         this.Clinic = new SimpleStringProperty(clinic);
+        this.People = new SimpleStringProperty(people);
         this.Total = new SimpleIntegerProperty(total);
         this.Positivity = new SimpleIntegerProperty(positivity);
         this.Persentage = new SimpleDoubleProperty((double)positivity / (double)total);
@@ -44,6 +46,8 @@ public class Analyze {
         return Clinic.get();
     }
 
+    public String getPeople() { return People.get(); }
+
     public String getSelection() {
         if(!getClinic().equals("")){
             return getClinic();
@@ -56,6 +60,9 @@ public class Analyze {
         }
         else if(!getState().equals("")){
             return getState();
+        }
+        else if(!getPeople().equals("")){
+            return getPeople();
         }
         else {
             return "";
@@ -85,6 +92,8 @@ public class Analyze {
 
     public void setClinic(String clinic) { Clinic.set(clinic); }
 
+    public void setPeople(String people) { People.set(people); }
+
     public void setTotal(Integer total) {
         Total.set(total);
     }
@@ -113,6 +122,8 @@ public class Analyze {
     public StringProperty clinicProperty() {
         return Clinic;
     }
+
+    public StringProperty peopleProperty() { return People; }
 
     public IntegerProperty totalProperty() {
         return Total;
