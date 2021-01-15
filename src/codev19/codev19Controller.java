@@ -2,10 +2,15 @@ package codev19;
 
 import codev19.Main;
 import codev19.model.Analyze;
+import codev19.utils.myPrint;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+
+import java.awt.event.MouseEvent;
 
 public class codev19Controller {
 
@@ -56,7 +61,6 @@ public class codev19Controller {
     @FXML
     private Label PersentageLabel;  // 확률 라벨
 
-
     private codev19.Main Main;  // 메인 윈도우
 
     @FXML
@@ -104,5 +108,9 @@ public class codev19Controller {
 
     public TableView<Analyze> getTable() {
         return AnalyzeTable;
+    }
+
+    public void ptrClicked(ActionEvent actionEvent) {
+        System.out.println("event.getX()");
     }
 }
