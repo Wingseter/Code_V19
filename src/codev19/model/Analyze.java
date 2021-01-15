@@ -50,19 +50,19 @@ public class Analyze {
 
     public String getSelection() {
         if(!getClinic().equals("")){
-            return getClinic();
+            return "Clinic";
         }
         else if(!getStreet().equals("")){
-            return getStreet();
+            return "Street";
         }
         else if(!getCity().equals("")){
-            return getCity();
+            return "City";
         }
         else if(!getState().equals("")){
-            return getState();
+            return "State";
         }
         else if(!getPeople().equals("")){
-            return getPeople();
+            return "People";
         }
         else {
             return "";

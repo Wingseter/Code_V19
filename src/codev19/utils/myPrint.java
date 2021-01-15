@@ -28,7 +28,9 @@ public class myPrint {
             double pagePrintableWidth = pageLayout.getPrintableWidth();
             double pagePrintableHeight = pageLayout.getPrintableHeight();
 
-            tblevMain.prefHeightProperty().bind(Bindings.size(tblevMain.getItems()).multiply(1));
+            tblevMain.prefHeightProperty().bind(Bindings.size(tblevMain.getItems()).multiply(35));
+            tblevMain.minHeightProperty().bind(tblevMain.prefHeightProperty());
+            tblevMain.maxHeightProperty().bind(tblevMain.prefHeightProperty());
 
             double scaleX = pagePrintableWidth / tblevMain.getBoundsInParent().getWidth();
             double scaleY = scaleX;
@@ -49,8 +51,8 @@ public class myPrint {
                 job.printPage(pageLayout, tblevMain);
             }
 
+            job.endJob();
         }
-        job.endJob();
 
         return true;
     }

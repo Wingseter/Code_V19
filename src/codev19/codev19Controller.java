@@ -47,7 +47,22 @@ public class codev19Controller {
 
     // Label 정의
     @FXML
-    private Label SelectLabel;   // 선택한 장소 라벨
+    private Label StateLabel;   // 시, 도 단위 라벨
+
+    @FXML
+    private Label CityLabel;    // 도시 단위 라벨
+
+    @FXML
+    private Label StreetLabel;  // 도로명 단위 라벨
+
+    @FXML
+    private Label ClinicLabel;  // 진료소 단위 라벨
+
+    @FXML
+    private Label PeopleLabel;  // 사람 단위 라벨벨
+
+    @FXML
+   private Label SelectLabel;   // 선택한 장소 라벨
 
     @FXML
     private Label TotalLabel;    // 전체 라벨
@@ -92,6 +107,11 @@ public class codev19Controller {
     private void showAnalyzeDetails(Analyze analyze) {
         if (analyze != null) {
             // 선택된 데이터가 있을 경우
+            StateLabel.setText(analyze.getState());
+            CityLabel.setText(analyze.getCity());
+            StreetLabel.setText(analyze.getStreet());
+            ClinicLabel.setText(analyze.getClinic());
+            PeopleLabel.setText(analyze.getPeople());
             SelectLabel.setText(analyze.getSelection());
             TotalLabel.setText(Integer.toString(analyze.getTotal()));
             PositiveLabel.setText(Integer.toString(analyze.getPositive()));
@@ -100,6 +120,11 @@ public class codev19Controller {
         }
         else {
             // 선택된 데이터가 없을 경우 모두 지운다.
+            StateLabel.setText("");
+            CityLabel.setText("");
+            StreetLabel.setText("");
+            ClinicLabel.setText("");
+            PeopleLabel.setText("");
             SelectLabel.setText("");
             TotalLabel.setText("");
             PositiveLabel.setText("");
