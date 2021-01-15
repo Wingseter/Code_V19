@@ -43,6 +43,7 @@
                         <Label fx:id="PersentageLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                      </children>
                   </GridPane>
+                  <Button layoutX="63.0" layoutY="334.0" mnemonicParsing="false" onAction="#ptrClicked" prefHeight="47.0" prefWidth="140.0" text="Print" />
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>

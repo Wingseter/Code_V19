@@ -24,7 +24,7 @@ public class myPrint {
         TableView<Analyze> tblevMain;
         tblevMain = table;
 
-        if(job.showPrintDialog((tblevMain = new TableView()).getScene().getWindow())){
+        if(job.showPrintDialog(tblevMain.getScene().getWindow())){
             double pagePrintableWidth = pageLayout.getPrintableWidth();
             double pagePrintableHeight = pageLayout.getPrintableHeight();
 

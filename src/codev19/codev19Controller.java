@@ -63,6 +63,8 @@ public class codev19Controller {
 
     private codev19.Main Main;  // 메인 윈도우
 
+    private myPrint myprt;      // 프린터 클래스
+
     @FXML
     private void initialize() {
         // 각각의 값들 테이블에 설정
@@ -110,7 +112,9 @@ public class codev19Controller {
         return AnalyzeTable;
     }
 
+    // 프린트 버튼 클릭했을때
     public void ptrClicked(ActionEvent actionEvent) {
-        System.out.println("event.getX()");
+        myprt = new myPrint();
+        myprt.doPrint(AnalyzeTable);
     }
 }
