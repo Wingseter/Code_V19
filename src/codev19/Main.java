@@ -98,7 +98,7 @@ public class Main extends Application {
         int flag; // 데이터 변화 플레그
 
         while(db.next()){
-            flag = 0;
+            
 
             state = db.getResult(1);    // 주
             city = db.getResult(2);     // 도시
@@ -122,7 +122,10 @@ public class Main extends Application {
                 VirusClinic++;
                 VirusTotal++;
             }
-
+            
+            // 플래그 초기화
+            flag = 0;
+            
             // State가 이전 데이터랑 다른 경우
             if(!PrevData.getState().equals(NewData.getState())){
                 flag = 4;
@@ -161,6 +164,7 @@ public class Main extends Application {
                 VirusState = 0;
             }
 
+            // 전체 1씩 증가
             TotalCount++;
             CityCount++;
             StateCount++;

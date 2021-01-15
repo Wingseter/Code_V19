@@ -101,4 +101,8 @@ public class codev19Controller {
             PersentageLabel.setText("");
         }
     }
+
+    public TableView<Analyze> getTable() {
+        return AnalyzeTable;
+    }
 }
