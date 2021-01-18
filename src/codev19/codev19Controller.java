@@ -5,10 +5,15 @@ import codev19.model.Analyze;
 import codev19.utils.myPrint;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.print.PrinterJob;
+import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import java.awt.event.MouseEvent;
 
@@ -79,6 +84,8 @@ public class codev19Controller {
     private codev19.Main Main;  // 메인 윈도우
 
     private myPrint myprt;      // 프린터 클래스
+    private Rectangle printRectangle;
+    private Node nodeToPrint;
 
     @FXML
     private void initialize() {
@@ -140,6 +147,42 @@ public class codev19Controller {
     // 프린트 버튼 클릭했을때
     public void ptrClicked(ActionEvent actionEvent) {
         myprt = new myPrint();
-        myprt.doPrint(AnalyzeTable);
+
+        PrinterJob job;
+
+        job = PrinterJob.createPrinterJob();
+        Group pane = new Group();
+        pane.getChildren().addAll(getNodeToPrint(), getPrintRectangle());
+        myprt.setScale(3);
+        myprt.setPrintRectangle(getPrintRectangle());
+        boolean success = myprt.print(job, true, getNodeToPrint());
+        if (success) {
+            job.endJob();
+        }
+    }
+
+    private Rectangle getPrintRectangle() {
+        if (printRectangle == null) {
+            printRectangle = new Rectangle(600, 500, null);
+            printRectangle.setStroke(Color.BLACK);
+        }
+        return printRectangle;
+    }
+
+    private Node getNodeToPrint() {
+        if (nodeToPrint == null) {
+
+            Group group = new Group();
+            group.getChildren().addAll(
+                    new Rectangle(200, 100, Color.RED),
+                    new Rectangle(200,100, 200, 100),
+                    new Rectangle(400, 200, 200, 100),
+                    new Rectangle(600, 300, 200, 100),
+                    new Rectangle(800, 400, 200, 100)
+            );
+
+            nodeToPrint = group;
+        }
+        return nodeToPrint;
     }
 }
